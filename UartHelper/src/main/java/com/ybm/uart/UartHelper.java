@@ -3,6 +3,10 @@ package com.ybm.uart;
 import com.vi.vioserial.NormalSerial;
 import com.vi.vioserial.listener.OnNormalDataListener;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class UartHelper {
 
     public static final int SUCCESS =0;
@@ -13,6 +17,9 @@ public class UartHelper {
     public static final int VALID=5;
     public static final int INVALID=6;
 
+    private String feedback_str="";
+    Lock locker;
+
     private NormalSerial normalSerial;
 
     private byte[] feedback_bytes;
@@ -20,6 +27,18 @@ public class UartHelper {
     public UartHelper(){
         normalSerial=NormalSerial.instance();
         normalSerial.addDataListener(onNormalDataListener);
+        locker=new ReentrantLock();
+   }
+
+
+   protected String getReceive(){
+       locker.lock();
+       try {
+           locker.tryLock(800, TimeUnit.MILLISECONDS);
+       } catch (InterruptedException e) {
+           throw new RuntimeException(e);
+       }
+       return feedback_str;
    }
 
    public int open(String com, int baudRate){
@@ -41,7 +60,8 @@ public class UartHelper {
    OnNormalDataListener onNormalDataListener=new OnNormalDataListener() {
        @Override
        public void normalDataBack(String hexData) {
-
+           feedback_str=hexData;
+           locker.unlock();
        }
    };
     public void send_byte(byte[] bytes){
