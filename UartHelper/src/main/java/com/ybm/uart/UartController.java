@@ -3,8 +3,13 @@ package com.ybm.uart;
 import com.vi.vioserial.NormalSerial;
 
 public class UartController {
-   public static String Test="";
-   public UartController(){
-       NormalSerial normalSerial=new NormalSerial();
+    NormalSerial normalSerial;
+    public UartController(String com,int baudRate){
+        normalSerial=NormalSerial.instance();
+        normalSerial.open(com,baudRate);
+   }
+
+   public void sendHex(String hex){
+        normalSerial.sendHex(hex);
    }
 }
