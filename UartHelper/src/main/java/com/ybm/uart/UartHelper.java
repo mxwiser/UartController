@@ -5,12 +5,19 @@ import com.vi.vioserial.listener.OnNormalDataListener;
 
 public class UartHelper {
     private NormalSerial normalSerial;
+    private String com;
+    private int baudRate;
     private byte[] feedback_bytes;
     private LockController lockController;
     public UartHelper(String com, int baudRate){
         normalSerial=NormalSerial.instance();
-        normalSerial.open(com,baudRate);
-        normalSerial.addDataListener(onNormalDataListener);
+        this.com=com;
+        this.baudRate=baudRate;
+   }
+
+   public void open(){
+       normalSerial.open(com,baudRate);
+       normalSerial.addDataListener(onNormalDataListener);
    }
 
     public LockController getLockController(){
