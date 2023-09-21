@@ -1,4 +1,4 @@
-package com.ybm.uartcontroller;
+package com.ybm.uart;
 
 import com.vi.vioserial.NormalSerial;
 
