@@ -5,12 +5,12 @@ import com.vi.vioserial.listener.OnNormalDataListener;
 
 public class UartHelper {
     private NormalSerial normalSerial;
+    private byte[] feedback_bytes;
     private LockController lockController;
     public UartHelper(String com, int baudRate){
         normalSerial=NormalSerial.instance();
         normalSerial.open(com,baudRate);
         normalSerial.addDataListener(onNormalDataListener);
-
    }
 
     public LockController getLockController(){
@@ -37,6 +37,15 @@ public class UartHelper {
        for (int i = 0; i<bytes.length; i++)
            hexString.append(String.format("%02x",bytes[i])) ;
        return hexString.toString();
+   }
+
+   public byte[] hex_to_bytes(String hexData) throws Exception{
+       feedback_bytes=new byte[hexData.length()/2];
+       for (int i = 0; i<hexData.length()/2; i++){
+              byte b= (byte) Integer.parseInt(hexData.substring(i*2,i*2+2),16);
+              feedback_bytes[i]=b;
+       }
+       return feedback_bytes;
    }
 
 }

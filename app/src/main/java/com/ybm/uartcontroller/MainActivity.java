@@ -14,6 +14,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         uarthelper =new UartHelper("/dev/ttyS4",9600);
-        uarthelper.getLockController();
+        uarthelper.getLockController().openAllLock(0);
     }
 }
