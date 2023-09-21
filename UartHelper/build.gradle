@@ -2,13 +2,15 @@ plugins {
     id 'com.android.library'
     id 'maven-publish'
 }
-group = 'com.github.mxwiser'
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'com.ybm.uart'
-            artifactId = 'UartHelper'
-            version = '1.1'
+            groupId = 'com.github.mxwiser'
+           // artifactId = 'UartController'
+          //  version = '1.1'
+
+
         }
     }
 }
