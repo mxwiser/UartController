@@ -5,7 +5,8 @@ plugins {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        mavenAar(MavenPublication) {
+
             groupId = 'com.github.mxwiser'
            // artifactId = 'UartController'
           //  version = '1.1'
