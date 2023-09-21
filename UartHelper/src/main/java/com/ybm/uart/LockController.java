@@ -7,6 +7,7 @@ public class LockController{
     }
     private int lock_cmd(int cmd,int address,int channel,int operate){
         byte[] bytes=new byte[5];
+        int state;
         bytes[0]= (byte) cmd;
         bytes[1]= (byte) address;
         bytes[2]= (byte) channel;
@@ -14,7 +15,17 @@ public class LockController{
         bytes[4]= (byte) (bytes[0]^bytes[1]^bytes[2]^bytes[3]);
         uartHelper.send_byte(bytes);
         String hexData=uartHelper.getReceive();
-        return 0;
+
+        if (hexData.equals(""))
+            state = uartHelper.TIMEOUT;
+        if (hexData.length()>=10){
+            state = uartHelper.SUCCESS;
+        }else {
+            state = uartHelper.EXPIRE;
+        }
+
+
+       return state;
     }
     public int openAllLock(int address){
         return  lock_cmd(0x9D,address,0x02,0x10);

@@ -32,6 +32,7 @@ public class UartHelper {
 
 
    protected String getReceive(){
+        feedback_str="";
        locker.lock();
        try {
            locker.tryLock(800, TimeUnit.MILLISECONDS);
