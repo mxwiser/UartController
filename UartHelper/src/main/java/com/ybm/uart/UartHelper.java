@@ -13,7 +13,7 @@ public class UartHelper {
 
    }
 
-    public LockController getApiController(){
+    public LockController getLockController(){
        if (lockController==null)
             lockController=new LockController(this);
        return lockController;
