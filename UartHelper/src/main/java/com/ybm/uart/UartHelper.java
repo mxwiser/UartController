@@ -38,6 +38,7 @@ public class UartHelper {
        } catch (InterruptedException e) {
            throw new RuntimeException(e);
        }
+       locker.unlock();
        return feedback_str;
    }
 
