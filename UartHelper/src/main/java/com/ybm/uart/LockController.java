@@ -39,7 +39,6 @@ public class LockController{
                             state = uartHelper.EXPIRE;
                     }
 
-
                 } catch (Exception e) {
                     state = uartHelper.EXCEPTION;
                     throw new RuntimeException(e);
