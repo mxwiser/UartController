@@ -3,6 +3,7 @@ package com.ybm.uart;
 public class LockController{
     private UartHelper uartHelper;
     private  String hexData;
+    private byte[] hex_buffer;
     public LockController(UartHelper uartHelper){
         this.uartHelper = uartHelper;
     }
@@ -16,7 +17,6 @@ public class LockController{
         bytes[4]= (byte) (bytes[0]^bytes[1]^bytes[2]^bytes[3]);
         uartHelper.send_byte(bytes);
         hexData=uartHelper.getReceive();
-
         if (hexData.equals(""))
             state = uartHelper.TIMEOUT;
         if (hexData.length()>=10){
@@ -27,7 +27,14 @@ public class LockController{
 
         if (state==uartHelper.SUCCESS){
             if (cmd==0x80){
+                try {
+                    hex_buffer=uartHelper.hex_to_bytes(hexData);
 
+
+                } catch (Exception e) {
+                    state = uartHelper.EXCEPTION;
+                    throw new RuntimeException(e);
+                }
             }
         }
 
