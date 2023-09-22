@@ -11,16 +11,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.ybm.uart.SimController;
 import com.ybm.uart.UartHelper;
 
 public class MainActivity extends AppCompatActivity {
     int feedback=-1;
     UartHelper uarthelper;
+    SimController simController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         uarthelper =new UartHelper();
+        simController = new SimController("/dev/ttyUSB3");
         uarthelper.open("/dev/ttyS4",9600);
 
 
