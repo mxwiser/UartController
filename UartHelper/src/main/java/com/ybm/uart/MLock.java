@@ -22,13 +22,13 @@ public class MLock {
 
 
     public synchronized  void tryLock() {
-        while (isLock) {
-            try {
-                wait(8000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+
+                try {
+                    wait(8000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
         isLock=true;
     }
 

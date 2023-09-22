@@ -41,7 +41,7 @@ public class UartHelper {
        feedback_str="";
        locker.unlock();
        locker.lock();
-       locker.lock();
+       locker.tryLock();
        Log.e("####Uart####",feedback_str);
        return feedback_str;
    }
@@ -67,7 +67,7 @@ public class UartHelper {
        public void normalDataBack(String hexData) {
            feedback_str=hexData;
 
-           locker.unlock();
+          // locker.unlock();
        }
    };
     public void send_byte(byte[] bytes){
