@@ -31,6 +31,17 @@ public class LockController{
     public int openAllLock(int address){
         return  lock_cmd(0x9D,address,0x02,0x10);
     }
-
+    public  int openLock(byte address, byte channel){
+        return  lock_cmd(0x8A,address,channel,0x11);
+    }
+    public  int openPower(byte address, byte channel){
+        return  lock_cmd(0x9A,address,channel,0x10);
+    }
+    public  int closePower(byte address, byte channel){
+        return  lock_cmd(0x9B,address,channel,0x10);
+    }
+    public  int getState(byte address, byte channel){
+        return  lock_cmd(0x80,address,channel,0x10);
+    }
 
 }
