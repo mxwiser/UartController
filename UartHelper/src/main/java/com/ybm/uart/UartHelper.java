@@ -37,7 +37,6 @@ public class UartHelper {
        locker.unlock();
        locker.lock();
        locker.tryLock(timeout);
-       Log.e("####Uart####",feedback_str);
        return feedback_str;
    }
 
