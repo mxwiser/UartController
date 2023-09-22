@@ -29,6 +29,15 @@ public class LockController{
             if (cmd==0x80){
                 try {
                     hex_buffer=uartHelper.hex_to_bytes(hexData);
+                    if (hex_buffer[4]==(hex_buffer[0]^hex_buffer[1]^hex_buffer[2]^hex_buffer[3])){
+                        if (hex_buffer[3]==0x11){
+                            state=uartHelper.VALID;
+                        }else {
+                            state=uartHelper.INVALID;
+                        }
+                    }else {
+                            state = uartHelper.EXPIRE;
+                    }
 
 
                 } catch (Exception e) {
