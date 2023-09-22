@@ -7,11 +7,9 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ybm.uart.SimController;
 import com.ybm.uart.UartHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     super.run();
 
-                    feedback_str= SimController.getICCID();
-                    handler.sendEmptyMessage(2);
+
                 }
             }.start();
 
