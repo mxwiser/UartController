@@ -43,7 +43,7 @@ public class SimController {
             while ((readSize = in.read(arrayOfByte)) == -1);
             out.close();
             in.close();
-            ccid = new String(arrayOfByte);
+            ccid = new String(arrayOfByte).toString();
             ccid = ccid.substring(ccid.indexOf(":") + 1, ccid.indexOf(":") + 22);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

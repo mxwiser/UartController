@@ -67,10 +67,10 @@ public class UartHelper {
         normalSerial.sendHex(bytes_to_string(bytes));
     }
 
-    public String[] getAllDevices(){
+   public String[] getAllDevices(){
         return serialPortFinder.getAllDevices();
     }
-    public String[] getAllDevicesPath(){
+   public String[] getAllDevicesPath(){
         return serialPortFinder.getAllDevicesPath();
     }
 
