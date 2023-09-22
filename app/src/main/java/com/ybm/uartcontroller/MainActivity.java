@@ -18,14 +18,13 @@ public class MainActivity extends AppCompatActivity {
     int feedback=-1;
     String feedback_str="";
     UartHelper uarthelper;
-    SimController simController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         uarthelper =new UartHelper();
-        simController = new SimController();
-        //uarthelper.open("/dev/ttyS4",9600);
+        uarthelper.open("/dev/ttyS4",9600);
 
 
     }
@@ -53,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     super.run();
-                    feedback_str= simController.getICCID("/dev/ttyUSB3");
+
+                    feedback_str= SimController.getICCID();
                     handler.sendEmptyMessage(2);
                 }
             }.start();

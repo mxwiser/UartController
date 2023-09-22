@@ -26,25 +26,24 @@ import java.io.RandomAccessFile;
 import java.text.BreakIterator;
 
 public class SimController {
-
+ private static String ccid = "";
+ private static final String GetCCIDCmd = "at+qccid\r\n";
+ private static final String device="/dev/ttyUSB3";
 
     public static String getICCID(String dev) {
-        String ccid = "";
-        int readSize = 0;
-        String cmd = "at+qccid\r\n";
         OutputStream out;
         InputStream in;
+        int readSize = 0;
+        byte[] arrayOfByte = new byte[1024];
         try {
             out = new FileOutputStream(dev);
             in = new FileInputStream(dev);
-            out.write(cmd.getBytes());
+            out.write(GetCCIDCmd.getBytes());
             out.flush();
-            byte[] arrayOfByte = new byte[1024];
-            while ((readSize = in.read(arrayOfByte)) == -1) {
-            }
+            while ((readSize = in.read(arrayOfByte)) == -1);
             out.close();
             in.close();
-            ccid = new String(arrayOfByte).substring(0, readSize);
+            ccid = new String(arrayOfByte);
             ccid = ccid.substring(ccid.indexOf(":") + 1, ccid.indexOf(":") + 22);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -53,7 +52,13 @@ public class SimController {
         }
         return ccid;
     }
+
+
+    public static String getICCID(){
+       return getICCID(device);
+    }
 }
+
 
 
 
