@@ -9,6 +9,10 @@ public class LockController{
     }
     private int lock_cmd(int cmd,int address,int channel,int operate){
         byte[] bytes=new byte[5];
+        long timeout=800;
+        if (cmd==0x9D)
+             timeout=10000;
+
         int state;
         bytes[0]= (byte) cmd;
         bytes[1]= (byte) address;
@@ -16,7 +20,7 @@ public class LockController{
         bytes[3]= (byte) operate;
         bytes[4]= (byte) (bytes[0]^bytes[1]^bytes[2]^bytes[3]);
         uartHelper.send_byte(bytes);
-        hexData=uartHelper.getReceive();
+        hexData=uartHelper.getReceive(timeout);
         if (hexData.equals(""))
             state = uartHelper.TIMEOUT;
         else if (hexData.length()>=10){

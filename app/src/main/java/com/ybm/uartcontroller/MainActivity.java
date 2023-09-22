@@ -1,9 +1,12 @@
 package com.ybm.uartcontroller;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -11,7 +14,7 @@ import android.widget.Toast;
 import com.ybm.uart.UartHelper;
 
 public class MainActivity extends AppCompatActivity {
-
+    int feedback=-1;
     UartHelper uarthelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,22 +27,43 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void setp_first(View view){
-        int feedback=uarthelper.getLockController().openAllLock(1);
-        Toast.makeText(getApplicationContext(),"code:"+feedback,Toast.LENGTH_LONG).show();
+
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                feedback=uarthelper.getLockController().openAllLock(1);
+                handler.sendEmptyMessage(1);
+            }
+        }.start();
+
+
+
 
     }
 
     public  void setp_second(View view){
-            new Thread(){
-                @SuppressLint("LongLogTag")
-                @Override
-                public void run() {
-                    super.run();
-                    int feedback=uarthelper.getLockController().openLock(1,1);
-                    Log.e("========================",""+feedback);
-                }
-            }.start();
+//            new Thread(){
+//                @SuppressLint("LongLogTag")
+//                @Override
+//                public void run() {
+//                    super.run();
+//                    feedback=uarthelper.getLockController().openLock(1,1);
+//                    handler.sendEmptyMessage(1);
+//                }
+//            }.start();
+
+
 
 
     }
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            if (msg.what==1){
+                Toast.makeText(getApplicationContext(),"code:"+feedback,Toast.LENGTH_LONG).show();
+            }
+        }
+    };
 }

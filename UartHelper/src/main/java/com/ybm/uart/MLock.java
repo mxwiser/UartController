@@ -21,14 +21,13 @@ public class MLock {
 
 
 
-    public synchronized  void tryLock() {
+    public synchronized  void tryLock(long timeout) {
 
-                try {
-                    wait(8000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
+        try {
+            wait(timeout);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         isLock=true;
     }
 
