@@ -16,6 +16,7 @@ import com.ybm.uart.UartHelper;
 
 public class MainActivity extends AppCompatActivity {
     int feedback=-1;
+    String feedback_str="";
     UartHelper uarthelper;
     SimController simController;
     @Override
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         uarthelper =new UartHelper();
-        simController = new SimController("/dev/ttyUSB3");
-        uarthelper.open("/dev/ttyS4",9600);
+        simController = new SimController();
+        //uarthelper.open("/dev/ttyS4",9600);
 
 
     }
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     super.run();
-                    feedback=uarthelper.getLockController().getState(1,1);
-                    handler.sendEmptyMessage(1);
+                    feedback_str= simController.getICCID("/dev/ttyUSB3");
+                    handler.sendEmptyMessage(2);
                 }
             }.start();
 
@@ -66,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
             if (msg.what==1){
                 Toast.makeText(getApplicationContext(),"code:"+feedback,Toast.LENGTH_LONG).show();
             }
+            if (msg.what==2){
+                Toast.makeText(getApplicationContext(),"code:"+feedback_str,Toast.LENGTH_LONG).show();
+            }
         }
     };
+
 }
