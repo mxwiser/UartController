@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'com.ybm.uartcontroller'
-    compileSdk 28
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.ybm.uartcontroller"
         minSdk 22
-        targetSdk 28
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 

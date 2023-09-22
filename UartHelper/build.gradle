@@ -23,6 +23,7 @@ android {
 
     defaultConfig {
         minSdk 17
+        //noinspection ExpiredTargetSdkVersion
         targetSdk 28
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -42,7 +43,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+//    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.github.Acccord:AndroidSerialPort:1.5.0'
 
