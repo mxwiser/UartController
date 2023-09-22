@@ -40,10 +40,10 @@ public class UartHelper {
        return feedback_str;
    }
 
+
+   //See the function. must run in Top-level Looper Thread
    public int open(String com, int baudRate){
-
        return normalSerial.open(com,baudRate);
-
    }
 
     public LockController getLockController(){
