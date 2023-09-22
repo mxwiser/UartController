@@ -1,5 +1,7 @@
 package com.ybm.uart;
 
+import android.serialport.SerialPortFinder;
+
 import com.vi.vioserial.NormalSerial;
 import com.vi.vioserial.listener.OnNormalDataListener;
 
@@ -21,12 +23,14 @@ public class UartHelper {
     Lock locker;
 
     private NormalSerial normalSerial;
+    private SerialPortFinder serialPortFinder;
 
     private byte[] feedback_bytes;
     private LockController lockController;
     public UartHelper(){
         normalSerial=NormalSerial.instance();
         normalSerial.addDataListener(onNormalDataListener);
+        serialPortFinder=new SerialPortFinder();
         locker=new ReentrantLock();
    }
 
@@ -69,6 +73,14 @@ public class UartHelper {
     public void send_byte(byte[] bytes){
         normalSerial.sendHex(bytes_to_string(bytes));
     }
+
+    public String[] getAllDevices(){
+        return serialPortFinder.getAllDevices();
+    }
+    public String[] getAllDevicesPath(){
+        return serialPortFinder.getAllDevicesPath();
+    }
+
    public String bytes_to_string(byte[] bytes){
        StringBuffer hexString = new StringBuffer();
        for (int i = 0; i<bytes.length; i++)
