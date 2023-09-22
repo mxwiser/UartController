@@ -6,11 +6,6 @@ import android.util.Log;
 import com.vi.vioserial.NormalSerial;
 import com.vi.vioserial.listener.OnNormalDataListener;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantLock;
-
 public class UartHelper {
 
     public static final int SUCCESS =0;
@@ -22,7 +17,7 @@ public class UartHelper {
 
 
     private String feedback_str="";
-    private MLock locker;
+    private MThreadLock locker;
 
     private NormalSerial normalSerial;
     private SerialPortFinder serialPortFinder;
@@ -33,7 +28,7 @@ public class UartHelper {
         normalSerial=NormalSerial.instance();
         normalSerial.addDataListener(onNormalDataListener);
         serialPortFinder=new SerialPortFinder();
-        locker=new MLock();
+        locker=new MThreadLock();
    }
 
 

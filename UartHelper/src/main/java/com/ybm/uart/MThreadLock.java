@@ -1,10 +1,6 @@
 package com.ybm.uart;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-
-public class MLock {
+public class MThreadLock {
     private static boolean isLock=false;
 
     public synchronized  void lock() {
