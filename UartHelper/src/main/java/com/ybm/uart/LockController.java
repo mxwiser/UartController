@@ -25,9 +25,17 @@ public class LockController{
             state = uartHelper.EXPIRE;
         }
 
+        if (state==uartHelper.SUCCESS){
+            if (cmd==0x80){
+
+            }
+        }
 
        return state;
     }
+
+
+
     public int openAllLock(int address){
         return  lock_cmd(0x9D,address,0x02,0x10);
     }
@@ -41,7 +49,7 @@ public class LockController{
         return  lock_cmd(0x9B,address,channel,0x10);
     }
     public  int getState(byte address, byte channel){
-        return  lock_cmd(0x80,address,channel,0x10);
+        return  lock_cmd(0x80,address,channel,0x33);
     }
 
 }

@@ -10,11 +10,12 @@ import java.util.concurrent.locks.ReentrantLock;
 public class UartHelper {
 
     public static final int SUCCESS =0;
-    public static final int TIMEOUT=2;
-    public static final int EXPIRE=3;
-    public static final int EXCEPTION=4;
-    public static final int VALID=5;
-    public static final int INVALID=6;
+    public static final int VALID=1;
+    public static final int INVALID=2;
+    public static final int TIMEOUT=-1;
+    public static final int EXPIRE=-2;
+    public static final int EXCEPTION=-3;
+
 
     private String feedback_str="";
     Lock locker;
