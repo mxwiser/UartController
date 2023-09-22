@@ -19,11 +19,11 @@ afterEvaluate {
 
 android {
     namespace 'com.ybm.uart'
-    compileSdk 31
+    compileSdk 28
 
     defaultConfig {
         minSdk 17
-        targetSdk 31
+        targetSdk 28
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
