@@ -1,12 +1,14 @@
 package com.ybm.uart;
 
 import android.serialport.SerialPortFinder;
+import android.util.Log;
 
 import com.vi.vioserial.NormalSerial;
 import com.vi.vioserial.listener.OnNormalDataListener;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class UartHelper {
@@ -20,7 +22,7 @@ public class UartHelper {
 
 
     private String feedback_str="";
-    Lock locker;
+    private MLock locker;
 
     private NormalSerial normalSerial;
     private SerialPortFinder serialPortFinder;
@@ -31,19 +33,16 @@ public class UartHelper {
         normalSerial=NormalSerial.instance();
         normalSerial.addDataListener(onNormalDataListener);
         serialPortFinder=new SerialPortFinder();
-        locker=new ReentrantLock();
+        locker=new MLock();
    }
 
 
    protected String getReceive(){
        feedback_str="";
-       locker.lock();
-       try {
-           locker.tryLock(800, TimeUnit.MILLISECONDS);
-       } catch (InterruptedException e) {
-           throw new RuntimeException(e);
-       }
        locker.unlock();
+       locker.lock();
+       locker.lock();
+       Log.e("####Uart####",feedback_str);
        return feedback_str;
    }
 
@@ -67,6 +66,7 @@ public class UartHelper {
        @Override
        public void normalDataBack(String hexData) {
            feedback_str=hexData;
+
            locker.unlock();
        }
    };

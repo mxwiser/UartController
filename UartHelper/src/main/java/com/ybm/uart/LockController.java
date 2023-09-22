@@ -19,7 +19,7 @@ public class LockController{
         hexData=uartHelper.getReceive();
         if (hexData.equals(""))
             state = uartHelper.TIMEOUT;
-        if (hexData.length()>=10){
+        else if (hexData.length()>=10){
             state = uartHelper.SUCCESS;
         }else {
             state = uartHelper.EXPIRE;
@@ -54,16 +54,16 @@ public class LockController{
     public int openAllLock(int address){
         return  lock_cmd(0x9D,address,0x02,0x10);
     }
-    public  int openLock(byte address, byte channel){
+    public  int openLock(int address, int channel){
         return  lock_cmd(0x8A,address,channel,0x11);
     }
-    public  int openPower(byte address, byte channel){
+    public  int openPower(int address, int channel){
         return  lock_cmd(0x9A,address,channel,0x10);
     }
-    public  int closePower(byte address, byte channel){
+    public  int closePower(int address, int channel){
         return  lock_cmd(0x9B,address,channel,0x10);
     }
-    public  int getState(byte address, byte channel){
+    public  int getState(int address, int channel){
         return  lock_cmd(0x80,address,channel,0x33);
     }
 
