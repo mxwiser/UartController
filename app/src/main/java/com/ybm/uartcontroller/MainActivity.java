@@ -43,17 +43,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public  void setp_second(View view){
-//            new Thread(){
-//                @SuppressLint("LongLogTag")
-//                @Override
-//                public void run() {
-//                    super.run();
-//                    feedback=uarthelper.getLockController().openLock(1,1);
-//                    handler.sendEmptyMessage(1);
-//                }
-//            }.start();
-
-
+            new Thread(){
+                @SuppressLint("LongLogTag")
+                @Override
+                public void run() {
+                    super.run();
+                    feedback=uarthelper.getLockController().getState(1,1);
+                    handler.sendEmptyMessage(1);
+                }
+            }.start();
 
 
     }

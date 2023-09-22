@@ -7,7 +7,7 @@ public class LockController{
     public LockController(UartHelper uartHelper){
         this.uartHelper = uartHelper;
     }
-    private int lock_cmd(int cmd,int address,int channel,int operate){
+    public int lock_cmd(int cmd,int address,int channel,int operate){
         byte[] bytes=new byte[5];
         long timeout=800;
         if (cmd==0x9D)
