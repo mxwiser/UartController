@@ -60,7 +60,6 @@ public class UartHelper {
        @Override
        public void normalDataBack(String hexData) {
            feedback_str=hexData;
-
            locker.unlock();
        }
    };
