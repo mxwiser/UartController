@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"code:"+feedback,Toast.LENGTH_LONG).show();
             }
             if (msg.what==2){
-                Toast.makeText(getApplicationContext(),"code:"+feedback_str,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"ICCID:"+feedback_str,Toast.LENGTH_LONG).show();
             }
         }
     };
