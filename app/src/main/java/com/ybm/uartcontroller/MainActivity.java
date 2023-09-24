@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     super.run();
-
+                    feedback=uarthelper.getLockController().getState(1,18);
+                    handler.sendEmptyMessage(1);
 
                 }
             }.start();
-
 
     }
     Handler handler=new Handler(){
