@@ -51,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     super.run();
-                    feedback=uarthelper.getLockController().getState(1,18);
+                    feedback=uarthelper.getLockController().getVector(1);
                     handler.sendEmptyMessage(1);
-
                 }
             }.start();
 

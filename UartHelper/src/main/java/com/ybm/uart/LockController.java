@@ -93,6 +93,13 @@ public class LockController{
     public int setVector(int address,int vector){
         return lock_cmd(0xDF,address,1,vector);
     }
+    public int getVector(int address){
+        if (lock_cmd(0xE1,address,1,1)==0){
+            return Integer.parseInt(hexData.substring(6,8));
+        }else {
+            return -1;
+        }
+    }
 
 
 }
