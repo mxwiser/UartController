@@ -14,7 +14,9 @@ public class UartHelper {
     public static final int TIMEOUT=-1;
     public static final int EXPIRE=-2;
     public static final int EXCEPTION=-3;
-
+    
+    public static final int VECTOR_NORMAL=1;
+    public static final int VECTOR_INNORMAL=2;
 
     private String feedback_str="";
     private MThreadLock locker;

@@ -2,6 +2,7 @@ package com.ybm.uart;
 
 public class LockController{
     private UartHelper uartHelper;
+
     private  String hexData;
     private byte[] hex_buffer;
     public LockController(UartHelper uartHelper){
@@ -55,6 +56,8 @@ public class LockController{
 
 
 
+
+
     public int openAllLock(int address){
         return  lock_cmd(0x9D,address,0x02,0x10);
     }
@@ -70,5 +73,26 @@ public class LockController{
     public  int getState(int address, int channel){
         return  lock_cmd(0x80,address,channel,0x33);
     }
+
+    public String getChipID(int address){
+       if (lock_cmd(0xDD,address,0x11,0x11)==0){
+           return hexData.substring(6,20);
+       }else {
+           return null;
+       }
+
+    }
+    public String getVersion(int address){
+        if (lock_cmd(0xDE,address,0x11,0x11)==0){
+            return hexData.substring(4,8);
+        }else {
+            return null;
+        }
+    }
+
+    public int setVector(int address,int vector){
+        return lock_cmd(0xDF,address,1,vector);
+    }
+
 
 }

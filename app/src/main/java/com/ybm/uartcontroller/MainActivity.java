@@ -28,13 +28,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     public void setp_first(View view){
 
         new Thread(){
             @Override
             public void run() {
                 super.run();
-                feedback=uarthelper.getLockController().openAllLock(1);
+                feedback=uarthelper.getLockController().setVector(1,UartHelper.VECTOR_INNORMAL);
                 handler.sendEmptyMessage(1);
             }
         }.start();
