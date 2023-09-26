@@ -15,8 +15,6 @@ public class MThreadLock {
     }
 
 
-
-
     public synchronized  void tryLock(long timeout) {
 
         try {
